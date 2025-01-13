@@ -8,7 +8,9 @@ const bcrypt = require('bcryptjs');
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5174'
+}));
 app.use(bodyParser.json());
 const rateLimit = require('express-rate-limit');
 
@@ -19,7 +21,7 @@ const otpLimiter = rateLimit({
 });
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URL1, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error(err));
 
@@ -71,7 +73,7 @@ app.post('/api/auth/request-otp', otpLimiter,async (req, res) => {
       const transporter = nodemailer.createTransport({
           service: 'gmail',  // You can replace 'gmail' with other services or use SMTP
           auth: {
-              user: 'chilekampalli_b220806cs@nitc.ac.in',  // Your Gmail address
+              user: process.env.EMAIL_USER,  // Your Gmail address
               pass: process.env.EMAIL_PASS // Use the app-specific password if 2FA is enabled
           },
           tls: {

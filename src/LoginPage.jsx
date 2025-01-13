@@ -13,8 +13,8 @@ export default function Login() {
 
     try {
       const endpoint = useOtp 
-        ? 'http://localhost:5001/api/auth/login-otp' 
-        : 'http://localhost:5001/api/auth/login-password';
+        ? 'https://loginpage-cads.onrender.com/api/auth/login-otp' 
+        : 'https://loginpage-cads.onrender.com/api/auth/login-password';
       
       const data = useOtp ? { email, otp } : { email, password };
       
@@ -27,7 +27,7 @@ export default function Login() {
 
   const handleRequestOtp = async () => {
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/request-otp', { email });
+      const response = await axios.post('https://loginpage-cads.onrender.com/api/auth/request-otp', { email });
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.response.data.message || "Failed to request OTP");

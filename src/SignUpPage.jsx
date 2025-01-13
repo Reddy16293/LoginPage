@@ -14,7 +14,9 @@ export default function Signup() {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(password)) {
-      toast.error("Password must be strong: 8+ characters, uppercase, number, special character");
+      toast.error(
+        "Password must be strong: 8+ characters, uppercase, number, special character"
+      );
       return;
     }
 
@@ -24,7 +26,10 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/signup', { email, password });
+      const response = await axios.post(
+        "https://loginpage-cads.onrender.com/api/auth/signup",
+        { email, password }
+      );
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Signup failed");

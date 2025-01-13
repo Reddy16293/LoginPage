@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:5174'
+  origin: 'http://localhost:5173'
 }));
 app.use(bodyParser.json());
 const rateLimit = require('express-rate-limit');
